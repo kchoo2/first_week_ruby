@@ -1,5 +1,6 @@
 
 class Employee
+  
   attr_reader :first_name, :last_name, :active, :salary
   attr_writer :first_name, :last_name, :active
 
@@ -20,6 +21,37 @@ class Employee
 
 end
 
+
+class Manager < Employee
+
+  def initialize(input_options)
+    super(input_options)
+    @employees = input_options[:employees]
+  end
+
+  def send_report
+    puts "Sending email..."
+    # use email sending library
+    puts "Email sent!!!"
+  end
+
+  # def employees
+  #   @employees
+  # end
+
+  def give_all_raises
+    @employees.each do |employee|      
+      employee.give_annual_raise
+    end  
+  end    
+
+  def fire_all_employees
+    @employees.each do |employee|
+      employee.active = false 
+    end
+  end
+end
+
 employee_1 = Employee.new(
                           first_name: "Bill", 
                           last_name: "McNeal", 
@@ -33,9 +65,18 @@ employee_2 = Employee.new(
                           active: true
                           )
 
+# employee_1.print_info
+# employee_2.print_info
 
+manager = Manager.new(
+                      first_name: "Bill",
+                      last_name: "Lumbergh",
+                      salary: 100000,
+                      active: true,
+                      employees: [employee_1, employee_2]
+                      )
 
-employee_1.print_info
-employee_2.print_info
+# manager.give_all_raises
 
+# manager.fire_all_employees
 

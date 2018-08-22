@@ -1,47 +1,49 @@
 
-# home_1 = { type: "townhouse", size: "2500", price: 500000}
-# home_2 = { type: "tent", size: "3000", price: 650000}
-# home_3 = { :type => "condominium", :size => "1200", :price => 800000}
-
-# puts "This #{ home_1[:type] } is #{ home_1[:size] } square feet and costs #{ home_1[:price] }"
-
-
 class Home
-  def initialize(input_type, input_size, input_price)
-    @type = input_type
-    @size = input_size
-    @price = input_price
+  attr_reader :type, :size, :price
+  attr_writer :type, :size, :price
+
+  def initialize(input_options)
+    @type = input_options[:type]
+    @size = input_options[:size]
+    @price = input_options[:price]
   end
 
   def print_info
     puts "This #{ type } is #{ size } square feet and costs #{ price }."
   end
 
-  def type
-    @type
-  end
+end
 
-  def size
-    @size
-  end
+class Longevity < Home
 
-  def price
-    @price
-  end
-
-  def price=(new_value)
-    @price = new_value
+  def initialize(input_options)
+    super(input_options)
+    @shelf_life = input_options[:shelf_life]
   end
 
 end
 
-home_1 = Home.new("townhouse", "2500", 500000)
-home_2 = Home.new("tent", "3000", 650000)
-home_3 = Home.new("condominium", "1200", 80   0000)
+home_1 = Longevity.new(
+                  type: "cave", 
+                  size: 2500, 
+                  price: 500000,
+                  shelf_life: 500
+                  )
+home_2 = Longevity.new(
+                  type: "tent", 
+                  size: 3000, 
+                  price: 650000,
+                  shelf_life: 1
+                  )
+home_3 = Longevity.new(
+                  type: "bathroom", 
+                  size: 1200, 
+                  price: 800000,
+                  shelf_life: 50
+                  )
 
 home_1.print_info
 home_2.print_info
 home_3.print_info
 
-home_1.price = 100
-home_1.print_info
